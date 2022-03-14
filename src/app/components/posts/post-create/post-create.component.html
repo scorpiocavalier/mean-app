@@ -1,0 +1,27 @@
+<form
+  #formDirective="ngForm"
+  class="flex flex-col justify-center w-96"
+  [formGroup]="form"
+  (ngSubmit)="addPost(formDirective)"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" autocomplete="off" />
+    <mat-error *ngIf="title.invalid">Title is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Content</mat-label>
+    <textarea matInput formControlName="content" rows="10" cols="50"></textarea>
+    <mat-error *ngIf="content.invalid">Content is required</mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!form.valid"
+  >
+    Save Post
+  </button>
+</form>
