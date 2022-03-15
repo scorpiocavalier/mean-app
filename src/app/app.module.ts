@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PostListComponent } from './components/posts/post-list/post-list.component';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PostListComponent } from './components/posts/post-list/post-list.compon
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

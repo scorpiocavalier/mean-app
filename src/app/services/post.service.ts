@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Post } from '../models/post.model';
 
@@ -10,7 +15,7 @@ export class PostService {
   private posts$: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
   private baseUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
     this.http
       .get<Post[]>(`${this.baseUrl}/posts`)
       .pipe(take(1))
@@ -20,10 +25,10 @@ export class PostService {
   addPost(post: Post) {
     // Add new post to the backend posts
     this.http
-      .post(`${this.baseUrl}/posts`, post)
+      .post<{ message: string }>(`${this.baseUrl}/posts`, post)
       .pipe(take(1))
       .subscribe({
-        next: () => console.log('New post added successfully'),
+        next: ({ message }) => this.showSnackBar(message),
         error: () => console.log('Could not add post'),
       });
 
@@ -33,5 +38,13 @@ export class PostService {
 
   getPosts(): Observable<Post[]> {
     return this.posts$.asObservable();
+  }
+
+  showSnackBar(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 1500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }

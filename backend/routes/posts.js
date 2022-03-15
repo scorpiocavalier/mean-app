@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const post = req.body;
   posts.push(post);
-  res.status(201);
+  res.status(201).json({ message: "New post was added successfully!" });
 });
 
 export { router as postRoutes };
