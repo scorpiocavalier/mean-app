@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './components/posts/post-create/post-create.component';
@@ -14,6 +15,7 @@ import { PostListComponent } from './components/posts/post-list/post-list.compon
   declarations: [AppComponent, PostCreateComponent, PostListComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

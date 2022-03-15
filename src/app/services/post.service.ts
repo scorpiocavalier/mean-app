@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Post } from '../models/post.model';
@@ -6,21 +7,16 @@ import { Post } from '../models/post.model';
   providedIn: 'root',
 })
 export class PostService {
-  private posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([
-    {
-      title: 'First Post',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores illum, architecto debitis vitae perspiciatis accusamus commodi porro et! Harum?',
-    },
-  ]);
+  private posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
+  private baseUrl = 'http://localhost:3000';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   addPost(post: Post) {
     this.posts.next([...this.posts.value, post]);
   }
 
   getPosts(): Observable<Post[]> {
-    return this.posts.asObservable();
+    return this.http.get<Post[]>(`${this.baseUrl}/posts`);
   }
 }
